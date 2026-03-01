@@ -869,6 +869,44 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
+   STEPS — process indicators
+   ========================================================================== */
+.steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 0.5rem; }
+.step { display: flex; gap: 1.5rem; align-items: flex-start; }
+.step-number {
+  font-family: var(--font-h); font-size: 1rem; font-weight: 800;
+  color: var(--white); background: var(--secondary);
+  width: 44px; height: 44px; min-width: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; line-height: 1;
+}
+.step h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+.step p { font-size: 0.92rem; line-height: 1.75; }
+
+/* Card & info-box content lists */
+.card ul, .info-box ul { list-style: none; padding: 0; margin: 0; }
+.card ul li, .info-box ul li {
+  font-size: 0.88rem; line-height: 1.7; padding-left: 1.25rem;
+  position: relative; margin-bottom: 0.35rem; text-align: left;
+}
+.card ul li::before, .info-box ul li::before {
+  content: '';
+  position: absolute; left: 0; top: 0.55em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--secondary);
+}
+
+/* CTA section links row */
+.cta-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Standalone form container */
+.form { max-width: 540px; }
+.form .btn { margin-top: 0.5rem; }
+
+/* Info box h3 */
+.info-box h3 { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem; }
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -911,4 +949,7 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   .glance-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }
   .workshop-grid { grid-template-columns: 1fr; }
+  .steps { gap: 1.5rem; }
+  .step { gap: 1rem; }
+  .step-number { width: 38px; height: 38px; min-width: 38px; font-size: 0.9rem; }
 }
