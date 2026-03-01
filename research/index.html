@@ -40,6 +40,7 @@
           <a href="../workshops/index.html">All Workshops</a>
           <a href="../workshops/build-your-website.html">Build Your Website</a>
           <a href="../workshops/find-your-customers.html">Find Your Customers</a>
+          <a href="../workshops/build-with-genai.html">Build with Generative AI</a>
         </div>
       </li>
       <li class="nav-dd">
@@ -68,6 +69,7 @@
   <a href="../workshops/index.html">All Workshops</a>
   <a href="../workshops/build-your-website.html">Build Your Website</a>
   <a href="../workshops/find-your-customers.html">Find Your Customers</a>
+  <a href="../workshops/build-with-genai.html">Build with Generative AI</a>
   <div class="mobile-section-title">Get Involved</div>
   <a href="../get-involved/volunteer.html">Volunteer</a>
   <a href="../get-involved/partner.html">Partner With Us</a>
@@ -91,30 +93,87 @@
 
 <section class="section">
   <div class="container">
-    <h2 class="reveal">Current Research Focus</h2>
-    <p class="reveal">Our research agenda is driven by the challenges we see on the ground every day. These are the questions we are actively investigating in partnership with community organizations across British Columbia.</p>
-    <div class="card-grid reveal">
-      <div class="card">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <h2 class="reveal">Open-Source Research Projects</h2>
+    <p class="reveal">We build tools in the open. Every project starts with a real problem faced by the communities we serve — and the code, data, and findings are published on GitHub so anyone can use, adapt, or contribute to them.</p>
+    <div class="project-grid reveal">
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-status project-status-active">Active</span>
+          <span class="project-category">AI &amp; Knowledge Management</span>
         </div>
-        <h3>Odoo Inventory Management for Small Businesses</h3>
-        <p>Enterprise resource planning tools like Odoo are powerful but notoriously difficult for small teams to implement. We are documenting real-world implementation patterns, common failure points, and step-by-step onboarding guides specifically for businesses with fewer than 20 employees. Our goal is to produce open-access playbooks that reduce the time and cost of ERP adoption by at least 40%.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        <h3>Knowledge Base Chat</h3>
+        <p>Organizations managing strata and condo documents need to answer questions across hundreds of pages of bylaws, minutes, and financial reports. Manual search is slow and error-prone. This RAG-powered conversational interface lets users ask natural language questions and receive AI-generated answers with source citations — eliminating the need to dig through lengthy documentation.</p>
+        <div class="project-tags">
+          <span class="project-tag">AWS Bedrock</span>
+          <span class="project-tag">Claude 3.5 Sonnet</span>
+          <span class="project-tag">OpenSearch</span>
+          <span class="project-tag">Streamlit</span>
+          <span class="project-tag">AWS CDK</span>
         </div>
-        <h3>Cloud Adoption Patterns</h3>
-        <p>Many small businesses in Canada still rely on paper records, desktop spreadsheets, or legacy on-premise software. We are mapping the decision-making process these businesses go through when considering cloud services — from Google Workspace and QuickBooks Online to industry-specific SaaS platforms. Our research tracks barriers including cost perception, data privacy concerns, and the digital literacy gap.</p>
+        <a href="https://github.com/TechMind-Innovators/knowledge-base-chat" target="_blank" rel="noopener noreferrer" class="project-gh">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub <span class="project-gh-arrow">&rarr;</span>
+        </a>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-status project-status-active">Active</span>
+          <span class="project-category">Document Processing</span>
         </div>
-        <h3>Digital Literacy Assessment</h3>
-        <p>There is no widely accepted framework for measuring digital literacy among Canadian small business owners. We are developing and validating an assessment tool that captures not just technical skills but also digital confidence, information evaluation abilities, and awareness of cybersecurity fundamentals. This tool will be freely available for use by other organizations serving similar communities.</p>
+        <h3>Document Extraction Service</h3>
+        <p>Organizations dealing with mixed document types — native PDFs and scanned images — face a choice between expensive OCR-only pipelines and inaccurate text extraction. This hybrid service intelligently combines native PDF text extraction with OCR only when needed, optimizing for cost, speed, and accuracy. It includes smart table extraction, document categorization, and batch processing.</p>
+        <div class="project-tags">
+          <span class="project-tag">PyMuPDF</span>
+          <span class="project-tag">AWS Textract</span>
+          <span class="project-tag">Streamlit</span>
+          <span class="project-tag">AWS CDK</span>
+          <span class="project-tag">S3</span>
+        </div>
+        <a href="https://github.com/TechMind-Innovators/doc-extraction-service" target="_blank" rel="noopener noreferrer" class="project-gh">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub <span class="project-gh-arrow">&rarr;</span>
+        </a>
       </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-status project-status-dev">In Development</span>
+          <span class="project-category">Health &amp; Wellness</span>
+        </div>
+        <h3>Health Monitor Dashboard</h3>
+        <p>People using wearable health monitors generate data scattered across multiple apps and devices with no unified view of their progress. This dashboard extracts data from health monitors and presents it through a clear, intuitive interface — allowing users to track their daily health metrics, spot trends, and take action on their well-being in one place.</p>
+        <div class="project-tags">
+          <span class="project-tag">Health Data APIs</span>
+          <span class="project-tag">Data Visualization</span>
+          <span class="project-tag">Dashboard</span>
+        </div>
+        <span class="project-gh-soon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Repo Coming Soon
+        </span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-status project-status-dev">In Development</span>
+          <span class="project-category">Cybersecurity</span>
+        </div>
+        <h3>Real-Time Security Streaming</h3>
+        <p>Security events need to be processed in real time to detect threats before damage is done. Traditional batch processing introduces dangerous delays between event occurrence and detection. This system uses Apache Kafka for high-throughput streaming and AI-powered processing to analyze security data in real time — enabling instant threat detection and automated response.</p>
+        <div class="project-tags">
+          <span class="project-tag">Apache Kafka</span>
+          <span class="project-tag">AI / ML</span>
+          <span class="project-tag">Stream Processing</span>
+          <span class="project-tag">Real-Time Analytics</span>
+        </div>
+        <span class="project-gh-soon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Repo Coming Soon
+        </span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -142,7 +201,7 @@
         <div class="feature-number">03</div>
         <div>
           <h3>Actionable Insights</h3>
-          <p>We measure the success of our research by whether it changes practice, not just by citation counts. Every study we publish includes a clear "so what" section with practical recommendations for small business owners, service providers, and policymakers. Our Odoo implementation research, for example, includes ready-to-use configuration templates and training curricula alongside the academic analysis.</p>
+          <p>We measure the success of our research by whether it changes practice, not just by citation counts. Every study we publish includes a clear "so what" section with practical recommendations for small business owners, service providers, and policymakers. Our implementation research, for example, includes ready-to-use configuration templates and training curricula alongside the academic analysis.</p>
         </div>
       </div>
     </div>
@@ -151,9 +210,17 @@
 
 <section class="section">
   <div class="container">
-    <div class="info-box reveal">
-      <h3>Open-Source on GitHub</h3>
-      <p>All TechMind research publications, datasets, assessment tools, and implementation guides are published on our GitHub organization. We use open licenses (Creative Commons and MIT) so that other charities, educators, and community organizations can freely adapt our work for their own contexts. If you find something useful, fork it. If you improve it, send us a pull request. Research is better when it is built in the open.</p>
+    <div class="gh-org-banner reveal">
+      <div class="gh-org-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </div>
+      <div class="gh-org-text">
+        <h3>Built in the Open</h3>
+        <p>All TechMind research projects are published under open licenses (MIT and Creative Commons) on our GitHub organization. Fork what is useful, send a pull request if you improve it. Research is better when it is built in the open.</p>
+        <a href="https://github.com/TechMind-Innovators" target="_blank" rel="noopener noreferrer" class="gh-org-link">
+          Visit TechMind-Innovators on GitHub <span>&rarr;</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -204,7 +271,9 @@
           <li><a href="../workshops/index.html">All Workshops</a></li>
           <li><a href="../workshops/build-your-website.html">Build Your Website</a></li>
           <li><a href="../workshops/find-your-customers.html">Find Your Customers</a></li>
+          <li><a href="../workshops/build-with-genai.html">Build with Generative AI</a></li>
           <li><a href="../research/index.html">Research Hub</a></li>
+          <li><a href="../programs/ai-ready-workforce.html">AI-Ready Workforce</a></li>
         </ul>
       </div>
       <div>
@@ -221,7 +290,7 @@
     <div class="footer-bottom">
       <div>
         <span>&copy; 2026 TechMind Innovators. All rights reserved.</span>
-        <p class="footer-charity">Registered Canadian Charity &middot; Vancouver, British Columbia, Canada</p>
+        <p class="footer-charity">Registered Canadian Charity &middot; No. 709006746RR001 &middot; Vancouver, British Columbia, Canada</p>
       </div>
       <a href="../privacy.html">Privacy Policy</a>
     </div>

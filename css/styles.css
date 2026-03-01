@@ -296,7 +296,7 @@ ul{list-style:none}
 
 /* Scrolling track — holds 2 copies of logos for seamless loop */
 .marquee-track {
-  display: flex; align-items: center; gap: 5.5rem;
+  display: flex; align-items: center;
   width: max-content;
   animation: marquee 35s linear infinite;
 }
@@ -305,6 +305,7 @@ ul{list-style:none}
 /* Individual logos */
 .marquee-logo {
   height: 56px; width: auto; flex-shrink: 0;
+  margin: 0 2.75rem;
   opacity: 0.4;
   filter: grayscale(100%);
   transition: opacity .3s var(--ease), filter .3s var(--ease);
@@ -322,8 +323,8 @@ ul{list-style:none}
 @media (max-width: 768px) {
   .partners { padding: 3rem 0; }
   .partners-label { margin-bottom: 1.75rem; }
-  .marquee-logo { height: 40px; }
-  .marquee-track { gap: 3.5rem; animation-duration: 22s; }
+  .marquee-logo { height: 40px; margin: 0 1.75rem; }
+  .marquee-track { animation-duration: 22s; }
 }
 
 /* ==========================================================================
@@ -355,14 +356,14 @@ ul{list-style:none}
    CTA CARDS (Get Involved on homepage)
    ========================================================================== */
 .cta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-.cta-card { background: var(--white); border-radius: var(--radius); padding: 2.25rem; border: 1px solid var(--border); transition: .25s var(--ease); display: block; }
+.cta-card { background: var(--white); border-radius: var(--radius); padding: 2.25rem; border: 1px solid var(--border); transition: .25s var(--ease); display: flex; flex-direction: column; align-items: center; text-align: center; }
 .cta-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .cta-card:nth-child(1):hover { border-color: var(--accent); }
 .cta-card:nth-child(2):hover { border-color: var(--secondary); }
 .cta-card:nth-child(3):hover { border-color: var(--primary); }
 .cta-card h3 { font-size: 1.12rem; font-weight: 700; color: var(--dark); margin-bottom: 0.65rem; }
 .cta-card p { font-size: 0.92rem; margin-bottom: 1.1rem; }
-.cta-link { font-family: var(--font-h); font-weight: 700; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; transition: .2s var(--ease); }
+.cta-link { font-family: var(--font-h); font-weight: 700; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; transition: .2s var(--ease); margin-top: auto; }
 .cta-card:nth-child(1) .cta-link { color: var(--accent); }
 .cta-card:nth-child(2) .cta-link { color: var(--secondary); }
 .cta-card:nth-child(3) .cta-link { color: var(--primary); }
@@ -372,39 +373,82 @@ ul{list-style:none}
    CONTENT CARDS — reusable card grid for programs, workshops, team, etc.
    ========================================================================== */
 .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.card-grid-4 { grid-template-columns: repeat(2, 1fr); }
 .card {
   background: var(--white); border-radius: var(--radius); padding: 2.25rem;
   border: 1px solid var(--border); transition: .25s var(--ease);
+  display: flex; flex-direction: column;
 }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .card-icon {
-  width: 52px; height: 52px; border-radius: 12px;
+  width: 52px; height: 52px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem; margin-bottom: 1.25rem;
+  font-size: 1.5rem; margin: 0 auto 1.25rem;
 }
+.card-icon svg { flex-shrink: 0; }
 .card-icon-primary { background: rgba(15,76,117,0.08); color: var(--primary); }
 .card-icon-secondary { background: rgba(27,152,164,0.1); color: var(--secondary); }
 .card-icon-accent { background: rgba(247,183,49,0.12); color: var(--accent); }
-.card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.6rem; }
-.card p { font-size: 0.92rem; line-height: 1.7; margin-bottom: 1rem; }
+.card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.6rem; text-align: center; }
+.card p { font-size: 0.92rem; line-height: 1.7; margin-bottom: 1rem; text-align: center; }
 .card-link {
   font-family: var(--font-h); font-weight: 700; font-size: 0.82rem;
   color: var(--secondary); display: inline-flex; align-items: center; gap: 6px;
-  transition: .2s var(--ease);
+  transition: .2s var(--ease); margin-top: auto; align-self: center;
 }
 .card-link:hover { gap: 10px; color: var(--primary); }
+.card > .btn { margin-top: auto; align-self: center; }
 
-/* Team cards */
-.team-card { text-align: center; }
+/* Team cards & grid */
+.team-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+.team-card {
+  text-align: center; background: var(--white); border-radius: var(--radius);
+  padding: 2.5rem 2rem; border: 1px solid var(--border);
+  transition: .25s var(--ease);
+}
+.section-alt .team-card { background: var(--white); }
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .team-avatar {
   width: 100px; height: 100px; border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.25rem;
-  font-family: var(--font-h); font-weight: 800; font-size: 1.5rem; color: var(--white);
+  font-family: var(--font-h); font-weight: 800; font-size: 1.35rem; color: var(--white);
+  overflow: hidden; flex-shrink: 0;
 }
-.team-card h3 { margin-bottom: 0.2rem; }
-.team-role { font-family: var(--font-h); font-weight: 600; font-size: 0.78rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+.team-avatar img { width: 100%; height: 100%; object-fit: cover; background: var(--light); }
+.team-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+.team-role { font-family: var(--font-h); font-weight: 600; font-size: 0.75rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; display: block; }
+.team-affiliation { font-size: 0.85rem; color: var(--text); margin-bottom: 0.75rem; font-style: italic; display: block; }
+.team-bio { font-size: 0.88rem; line-height: 1.75; color: var(--text); }
+
+/* Founder featured card — horizontal layout */
+.team-featured {
+  display: flex; align-items: flex-start; gap: 2.5rem;
+  text-align: left; padding: 2.75rem;
+  border-color: var(--secondary);
+  background: linear-gradient(135deg, rgba(27,152,164,0.02) 0%, var(--white) 100%);
+  margin-top: 2.5rem; margin-bottom: 2rem;
+}
+.team-featured .team-avatar {
+  width: 120px; height: 120px; margin: 0; flex-shrink: 0;
+}
+.team-featured .team-role { margin-bottom: 0.35rem; }
+.team-featured .team-bio { font-size: 0.9rem; }
+.team-featured + .team-grid { margin-top: 0; }
+
+/* Board grid — 3-column compact layout */
+.board-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 2.5rem;
+}
+.board-grid .team-avatar {
+  width: 80px; height: 80px; font-size: 1.15rem;
+}
+.board-grid .team-bio { font-size: 0.85rem; }
 
 /* ==========================================================================
    CONTENT SECTIONS — for inner pages
@@ -418,19 +462,63 @@ ul{list-style:none}
 .content-narrow ul { padding-left: 1.5rem; list-style: disc; margin-bottom: 1rem; }
 .content-narrow ul li { margin-bottom: 0.4rem; line-height: 1.7; }
 
+/* Content block — standard prose container for inner pages */
+.content-block { max-width: 760px; }
+.content-block .eyebrow { margin-bottom: 0.5rem; }
+.content-block h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem); font-weight: 800;
+  color: var(--dark); line-height: 1.2; margin-bottom: 1.25rem;
+}
+.content-block p { margin-bottom: 1.15rem; line-height: 1.85; }
+.content-block p:last-child { margin-bottom: 0; }
+
+/* Section-level headings on inner pages (outside content-block) */
+.section > .container > h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem); font-weight: 800;
+  color: var(--dark); line-height: 1.2; margin-bottom: 0.75rem;
+}
+.section > .container > p {
+  max-width: 620px; line-height: 1.8; margin-bottom: 2.5rem;
+}
+.section-alt > .container > h2 { color: var(--dark); }
+
+/* Feature grid — cards for program/approach summaries */
+.feature-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem;
+  margin-top: 2rem;
+}
+.feature-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 1.75rem; border: 1px solid var(--border);
+  transition: .25s var(--ease);
+}
+.section-alt .feature-card { background: var(--white); }
+.feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.feature-card h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.6rem;
+}
+.feature-card p { font-size: 0.92rem; line-height: 1.75; margin: 0; }
+
 /* Two-column content */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .two-col-wide { grid-template-columns: 1.4fr 1fr; }
 
-/* Feature list */
-.feature-list { display: flex; flex-direction: column; gap: 1.5rem; }
-.feature-item { display: flex; gap: 1rem; align-items: flex-start; }
+/* Feature list — numbered steps */
+.feature-list { display: flex; flex-direction: column; gap: 2rem; }
+.feature-item { display: flex; gap: 1.5rem; align-items: flex-start; }
 .feature-dot {
   width: 10px; height: 10px; border-radius: 50%;
   background: var(--secondary); margin-top: 6px; flex-shrink: 0;
 }
+.feature-number {
+  font-family: var(--font-h); font-size: 1.5rem; font-weight: 800;
+  color: var(--secondary); line-height: 1; flex-shrink: 0;
+  width: 2.5rem; padding-top: 0.15rem;
+}
+.feature-item h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
 .feature-item h4 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.25rem; }
-.feature-item p { font-size: 0.9rem; line-height: 1.7; }
+.feature-item p { font-size: 0.92rem; line-height: 1.75; }
 
 /* Info box */
 .info-box {
@@ -499,6 +587,282 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
 .footer-charity { font-size: 0.72rem; margin-top: 0.5rem; color: rgba(255,255,255,0.3); }
 
 /* ==========================================================================
+   REPORT CARDS — annual reports page
+   ========================================================================== */
+.report-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+  margin-top: 2.5rem;
+}
+.report-card {
+  background: var(--white); border-radius: var(--radius); padding: 2.25rem;
+  border: 1px solid var(--border); transition: .25s var(--ease);
+  display: flex; flex-direction: column;
+}
+.report-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+.report-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.report-year {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 50px;
+  background: rgba(15,76,117,0.08); color: var(--primary);
+}
+.report-year-upcoming {
+  background: rgba(247,183,49,0.12); color: #c48f1a;
+}
+.report-card h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.75rem;
+}
+.report-card > p {
+  font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.25rem;
+}
+.report-highlights {
+  list-style: none; margin-bottom: 1.5rem; padding: 0;
+}
+.report-highlights li {
+  font-size: 0.88rem; line-height: 1.7; padding-left: 1.25rem;
+  position: relative; margin-bottom: 0.35rem;
+}
+.report-highlights li::before {
+  content: '';
+  position: absolute; left: 0; top: 0.55em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--secondary);
+}
+.report-card .btn { margin-top: auto; align-self: flex-start; }
+
+/* ==========================================================================
+   PROJECT CARDS — research open-source project showcase
+   ========================================================================== */
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.project-card {
+  background: var(--white); border-radius: var(--radius); padding: 2rem;
+  border: 1px solid var(--border); transition: .25s var(--ease);
+  display: flex; flex-direction: column; position: relative;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--secondary); }
+
+/* Card header — status + category */
+.project-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.project-status {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 50px;
+}
+.project-status-active {
+  background: rgba(27,152,164,0.1); color: var(--secondary);
+}
+.project-status-dev {
+  background: rgba(247,183,49,0.12); color: #c48f1a;
+}
+.project-category {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 600;
+  color: var(--text); letter-spacing: 0.04em;
+}
+
+/* Card body */
+.project-card h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.75rem; text-align: left;
+}
+.project-card > p {
+  font-size: 0.9rem; line-height: 1.75; text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+/* Tech stack tags */
+.project-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 1.5rem;
+}
+.project-tag {
+  font-family: var(--font-h); font-size: 0.7rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 6px;
+  background: var(--light); color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+/* GitHub link button */
+.project-gh {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-h); font-weight: 700; font-size: 0.82rem;
+  color: var(--white); background: var(--dark);
+  padding: 10px 20px; border-radius: 50px;
+  transition: .25s var(--ease); margin-top: auto; align-self: flex-start;
+}
+.project-gh:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(27,152,164,0.25);
+}
+.project-gh svg { flex-shrink: 0; }
+.project-gh-arrow { transition: .2s var(--ease); }
+.project-gh:hover .project-gh-arrow { transform: translateX(3px); }
+
+.project-gh-soon {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-h); font-weight: 700; font-size: 0.82rem;
+  color: var(--text); background: var(--light);
+  padding: 10px 20px; border-radius: 50px;
+  margin-top: auto; align-self: flex-start;
+  border: 1px solid var(--border);
+}
+
+/* GitHub org banner */
+.gh-org-banner {
+  background: var(--dark); border-radius: var(--radius-lg);
+  padding: 2.5rem; display: flex; align-items: center; gap: 2rem;
+  position: relative; overflow: hidden;
+}
+.gh-org-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(27,152,164,0.1) 0%, transparent 55%);
+}
+.gh-org-banner > * { position: relative; z-index: 1; }
+.gh-org-icon {
+  width: 64px; height: 64px; flex-shrink: 0;
+  background: rgba(255,255,255,0.06); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.gh-org-text h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--white);
+  margin-bottom: 0.4rem; text-align: left;
+}
+.gh-org-text p {
+  font-size: 0.9rem; color: rgba(255,255,255,0.55);
+  line-height: 1.7; margin-bottom: 1rem; text-align: left;
+}
+.gh-org-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-h); font-weight: 700; font-size: 0.82rem;
+  color: var(--accent); transition: .2s var(--ease);
+}
+.gh-org-link:hover { color: var(--white); gap: 10px; }
+
+/* ==========================================================================
+   REGISTRATION STATUS BANNER
+   ========================================================================== */
+.reg-banner {
+  background: var(--light);
+  border-left: 4px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.reg-banner-status {
+  font-family: var(--font-h); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--secondary); background: rgba(27,152,164,0.1);
+  padding: 5px 14px; border-radius: 50px;
+  display: inline-block; margin-bottom: 0.5rem;
+}
+.reg-banner-text {
+  font-size: 0.95rem; color: var(--text); line-height: 1.7; max-width: 520px;
+}
+
+/* ==========================================================================
+   AT-A-GLANCE DETAIL CARDS
+   ========================================================================== */
+.glance-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+.glance-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.75rem 1.25rem;
+  text-align: center; transition: .25s var(--ease);
+}
+.glance-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.glance-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(27,152,164,0.08);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; color: var(--secondary);
+}
+.glance-icon svg { width: 22px; height: 22px; }
+.glance-label {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--secondary); margin-bottom: 0.35rem;
+}
+.glance-value {
+  font-family: var(--font-h); font-size: 1.05rem; font-weight: 700;
+  color: var(--dark); margin-bottom: 0.3rem;
+}
+.glance-note { font-size: 0.8rem; color: var(--text); line-height: 1.5; }
+.glance-note a { color: var(--secondary); transition: .2s var(--ease); }
+.glance-note a:hover { color: var(--primary); }
+
+/* ==========================================================================
+   WORKSHOP PHOTO GALLERY PLACEHOLDERS
+   ========================================================================== */
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.gallery-placeholder {
+  aspect-ratio: 4 / 3; border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 1.5rem;
+  transition: .25s var(--ease);
+}
+.gallery-placeholder:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.gallery-placeholder svg { width: 36px; height: 36px; color: rgba(255,255,255,0.5); }
+.gallery-placeholder span {
+  font-family: var(--font-h); font-size: 0.78rem; font-weight: 600;
+  color: rgba(255,255,255,0.65); text-align: center; line-height: 1.4;
+}
+
+/* ==========================================================================
+   WORKSHOP LISTING CARDS — for workshops index page
+   ========================================================================== */
+.workshop-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+.workshop-card {
+  background: var(--white); border-radius: var(--radius); padding: 2rem;
+  border: 1px solid var(--border); transition: .25s var(--ease);
+  display: flex; flex-direction: column;
+}
+.workshop-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.workshop-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.workshop-card-status {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 50px;
+}
+.workshop-card-status-soon {
+  background: rgba(247,183,49,0.12); color: #c48f1a;
+}
+.workshop-card-status-open {
+  background: rgba(27,152,164,0.1); color: var(--secondary);
+}
+.workshop-card-duration {
+  font-family: var(--font-h); font-size: 0.68rem; font-weight: 600;
+  color: var(--text); letter-spacing: 0.04em;
+}
+.workshop-card h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.6rem; text-align: left;
+}
+.workshop-card > p {
+  font-size: 0.9rem; line-height: 1.75; text-align: left;
+  margin-bottom: 1.25rem;
+}
+.workshop-card .btn { margin-top: auto; align-self: flex-start; }
+
+/* ==========================================================================
    SCROLL REVEAL
    ========================================================================== */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity .65s ease, transform .65s ease; }
@@ -511,8 +875,15 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gh-org-banner { flex-direction: column; text-align: center; align-items: center; }
+  .gh-org-text h3, .gh-org-text p { text-align: center; }
+  .gh-org-link { justify-content: center; }
+  .board-grid { grid-template-columns: repeat(2, 1fr); }
+  .glance-grid { grid-template-columns: repeat(2, 1fr); }
+  .workshop-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .nav-links { display: none; }
@@ -522,11 +893,22 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   .hero-actions { flex-direction: column; }
   .cta-grid { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
+  .report-grid { grid-template-columns: 1fr; }
   .impact-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .board-grid { grid-template-columns: 1fr; }
+  .team-featured { flex-direction: column; text-align: center; gap: 1.5rem; padding: 2rem; }
+  .team-featured .team-avatar { margin: 0 auto; width: 100px; height: 100px; }
   .section { padding: 4rem 0; }
   .page-hero { padding: 6rem 0 3rem; }
   .page-hero h1 { font-size: 1.8rem; }
   .stat-row { gap: 2rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  .reg-banner { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+  .glance-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .workshop-grid { grid-template-columns: 1fr; }
 }
