@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="160" viewBox="0 0 580 160" fill="none">
+  <!-- Ring -->
+  <circle cx="80" cy="80" r="64" stroke="#1B98A4" stroke-width="14" fill="none"/>
+  <!-- Dot -->
+  <circle cx="80" cy="80" r="22" fill="#F7B731"/>
+  <!-- TechMind -->
+  <text x="176" y="96" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="700" font-size="64" fill="#0B1D33">TechMind</text>
+</svg>

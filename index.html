@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechMind Innovators — Advancing Technology Education Across Canada</title>
+  <meta name="description" content="TechMind Innovators is a registered Canadian charity empowering businesses, entrepreneurs and individuals through hands-on technology education.">
+  <link rel="icon" type="image/svg+xml" href="assets/techmind-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="580" height="160" viewBox="0 0 580 160" fill="none">
+          <circle cx="80" cy="80" r="64" stroke="#1B98A4" stroke-width="14" fill="none"/>
+          <circle cx="80" cy="80" r="22" fill="#F7B731"/>
+          <text x="176" y="96" font-family="'Plus Jakarta Sans','Segoe UI',sans-serif" font-weight="700" font-size="64" fill="#FFFFFF">TechMind</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-dd">
+          <span class="nav-dd-toggle">About</span>
+          <div class="nav-dd-menu">
+            <a href="about/index.html">Our Story</a>
+            <a href="about/team.html">Our Team</a>
+            <a href="about/board.html">Board of Directors</a>
+            <a href="about/reports.html">Annual Reports</a>
+          </div>
+        </li>
+        <li><a href="research/index.html">Research</a></li>
+        <li><a href="programs/index.html">Programs</a></li>
+        <li class="nav-dd">
+          <span class="nav-dd-toggle">Workshops</span>
+          <div class="nav-dd-menu">
+            <a href="workshops/index.html">All Workshops</a>
+            <a href="workshops/build-your-website.html">Build Your Website</a>
+            <a href="workshops/find-your-customers.html">Find Your Customers</a>
+          </div>
+        </li>
+        <li class="nav-dd">
+          <span class="nav-dd-toggle">Get Involved</span>
+          <div class="nav-dd-menu">
+            <a href="get-involved/volunteer.html">Volunteer</a>
+            <a href="get-involved/partner.html">Partner With Us</a>
+            <a href="get-involved/community.html">Join Our Community</a>
+          </div>
+        </li>
+        <li><a href="https://www.canadahelps.org/en/dn/123038" target="_blank" rel="noopener noreferrer" class="nav-donate">Donate</a></li>
+      </ul>
+      <button class="nav-mobile" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ========== MOBILE MENU ========== -->
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <div class="mobile-section-title">About</div>
+    <a href="about/index.html">Our Story</a>
+    <a href="about/team.html">Our Team</a>
+    <a href="about/board.html">Board of Directors</a>
+    <a href="about/reports.html">Annual Reports</a>
+    <div class="mobile-section-title">Learn</div>
+    <a href="research/index.html">Research</a>
+    <a href="programs/index.html">Programs</a>
+    <div class="mobile-section-title">Workshops</div>
+    <a href="workshops/index.html">All Workshops</a>
+    <a href="workshops/build-your-website.html">Build Your Website</a>
+    <a href="workshops/find-your-customers.html">Find Your Customers</a>
+    <div class="mobile-section-title">Get Involved</div>
+    <a href="get-involved/volunteer.html">Volunteer</a>
+    <a href="get-involved/partner.html">Partner With Us</a>
+    <a href="get-involved/community.html">Join Our Community</a>
+    <a href="https://www.canadahelps.org/en/dn/123038" target="_blank" rel="noopener noreferrer" class="mobile-donate">Donate</a>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <canvas id="hero-particles" class="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Registered Canadian Charity
+      </div>
+      <h1>A New <span class="ta">Digital</span> Chapter Across <span class="ts">Canada</span>.</h1>
+      <p class="hero-sub">TechMind empowers businesses, entrepreneurs, and individuals across Canada — transforming digital challenges into opportunities through hands-on technology education.</p>
+      <div class="hero-actions">
+        <a href="programs/index.html" class="btn btn-accent">Explore Programs <span class="btn-arrow">→</span></a>
+        <a href="https://www.canadahelps.org/en/dn/123038" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">Donate Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARTNERS ========== -->
+  <section class="partners">
+    <div class="partners-label">Supported &amp; Partnered With</div>
+    <div class="marquee" aria-label="Partner logos">
+      <div class="marquee-track">
+        <img src="assets/partners/aws.png" alt="Amazon Web Services" class="marquee-logo">
+        <img src="assets/partners/vpl.png" alt="Vancouver Public Library" class="marquee-logo">
+        <img src="assets/partners/bc-province.png" alt="Province of British Columbia" class="marquee-logo">
+        <img src="assets/partners/ircc.png" alt="IRCC" class="marquee-logo">
+        <img src="assets/partners/csc.png" alt="Community Services Council" class="marquee-logo">
+        <img src="assets/partners/partner-6.png" alt="Supporting Partner" class="marquee-logo">
+        <!-- Duplicate for seamless loop -->
+        <img src="assets/partners/aws.png" alt="Amazon Web Services" class="marquee-logo" aria-hidden="true">
+        <img src="assets/partners/vpl.png" alt="Vancouver Public Library" class="marquee-logo" aria-hidden="true">
+        <img src="assets/partners/bc-province.png" alt="Province of British Columbia" class="marquee-logo" aria-hidden="true">
+        <img src="assets/partners/ircc.png" alt="IRCC" class="marquee-logo" aria-hidden="true">
+        <img src="assets/partners/csc.png" alt="Community Services Council" class="marquee-logo" aria-hidden="true">
+        <img src="assets/partners/partner-6.png" alt="Supporting Partner" class="marquee-logo" aria-hidden="true">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT (Summary) ========== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-visual-inner">
+            <div class="av-ring"><div class="av-dot"></div></div>
+            <div class="av-text">Engineer-Led Education</div>
+          </div>
+        </div>
+        <div class="reveal">
+          <span class="eyebrow">Who We Are</span>
+          <h2 class="stitle">About TechMind Innovators</h2>
+          <p class="stext"><strong>It all started when we noticed how many online tasks were simpler than people thought.</strong> As software engineers, we wanted to share these easy solutions with small businesses and anyone looking to grow online.</p>
+          <p class="stext" style="margin-top:1rem">Our engineer-led workshops cut through the noise, offering hands-on guidance and best practices that accelerate your learning journey. We partner with AWS and community organizations to deliver programs from British Columbia to Ecuador.</p>
+          <p class="about-hl">Master complex software without the overwhelm.</p>
+          <div style="margin-top:1.5rem">
+            <a href="about/index.html" class="btn btn-primary">Read Our Full Story <span class="btn-arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROGRAMS (Summary) ========== -->
+  <section class="section section-alt" id="programs">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3.5rem" class="reveal">
+        <span class="eyebrow">What We Offer</span>
+        <h2 class="stitle">Our Programs</h2>
+        <p class="stext" style="margin:0 auto">From interactive workshops to one-on-one mentoring and applied research — we meet you where you are on your digital journey.</p>
+      </div>
+      <div class="card-grid">
+        <a href="workshops/index.html" class="card reveal" style="text-decoration:none">
+          <div class="card-icon card-icon-secondary">&#128187;</div>
+          <h3>Interactive Digital Skills Workshops</h3>
+          <p>Group sessions led by software engineers covering website building, digital marketing, cloud tools, and more.</p>
+          <span class="card-link">View Workshops →</span>
+        </a>
+        <a href="programs/index.html" class="card reveal" style="text-decoration:none">
+          <div class="card-icon card-icon-accent">&#127891;</div>
+          <h3>Tailored One-on-One Sessions</h3>
+          <p>Personalized mentoring to address your specific digital challenges, from business tools to online presence.</p>
+          <span class="card-link">Learn More →</span>
+        </a>
+        <a href="research/index.html" class="card reveal" style="text-decoration:none">
+          <div class="card-icon card-icon-primary">&#128218;</div>
+          <h3>Digital Adoption Research</h3>
+          <p>Applied research into how small businesses and nonprofits can adopt technology more effectively.</p>
+          <span class="card-link">Explore Research →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== IMPACT ========== -->
+  <section class="section section-dark" id="impact">
+    <div class="container">
+      <div class="impact-header reveal">
+        <span class="eyebrow">Our Impact</span>
+        <h2 class="stitle">Measured Results, Real Change</h2>
+        <p>TechMind Innovators delivers measurable outcomes for communities across Canada and Latin America.</p>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card reveal"><div class="impact-num" data-target="500" data-suffix="+">0</div><div class="impact-lbl">Participants Trained</div></div>
+        <div class="impact-card reveal"><div class="impact-num" data-target="2" data-suffix="">0</div><div class="impact-lbl">Countries Reached</div></div>
+        <div class="impact-card reveal"><div class="impact-num" data-target="50" data-suffix="+">0</div><div class="impact-lbl">Workshops Delivered</div></div>
+        <div class="impact-card reveal"><div class="impact-num" data-text="AWS">AWS</div><div class="impact-lbl">Strategic Cloud Partner</div></div>
+        <div class="impact-card reveal"><div class="impact-num" data-target="20" data-suffix="+">0</div><div class="impact-lbl">Businesses Supported</div></div>
+        <div class="impact-card reveal"><div class="impact-num" data-text="100%">100%</div><div class="impact-lbl">Engineer-Led Instruction</div></div>
+      </div>
+      <div class="impact-foot reveal"><p>And we're just getting started.</p></div>
+    </div>
+  </section>
+
+  <!-- ========== GET INVOLVED ========== -->
+  <section class="section section-alt" id="get-involved">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem" class="reveal">
+        <span class="eyebrow">Get Involved</span>
+        <h2 class="stitle">Support Our Mission</h2>
+      </div>
+      <div class="cta-grid">
+        <a href="https://www.canadahelps.org/en/dn/123038" target="_blank" rel="noopener noreferrer" class="cta-card reveal">
+          <h3>Donate</h3>
+          <p>Your donation directly funds workshops and resources for underserved communities in Canada and Ecuador. Every dollar accelerates digital adoption.</p>
+          <span class="cta-link">Donate via CanadaHelps →</span>
+        </a>
+        <a href="get-involved/partner.html" class="cta-card reveal">
+          <h3>Partner With Us</h3>
+          <p>Whether you're a company, university, or government body — let's collaborate to scale digital education where it's needed most.</p>
+          <span class="cta-link">Become a Partner →</span>
+        </a>
+        <a href="workshops/index.html" class="cta-card reveal">
+          <h3>Join a Workshop</h3>
+          <p>Build your website, find your customers, and master complex tools. Our engineer-led sessions make digital skills accessible.</p>
+          <span class="cta-link">View Upcoming Workshops →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="580" height="160" viewBox="0 0 580 160" fill="none">
+              <circle cx="80" cy="80" r="64" stroke="#1B98A4" stroke-width="14" fill="none"/>
+              <circle cx="80" cy="80" r="22" fill="#F7B731"/>
+              <text x="176" y="96" font-family="'Plus Jakarta Sans','Segoe UI',sans-serif" font-weight="700" font-size="64" fill="#FFFFFF">TechMind</text>
+            </svg>
+          </div>
+          <p class="footer-brand-text">Rooted in Canada, reaching globally. TechMind Innovators is a registered Canadian charity advancing technology education and digital adoption.</p>
+          <div class="footer-nl">
+            <h4>Newsletter</h4>
+            <div class="footer-nl-form">
+              <input type="email" placeholder="Your email address">
+              <button>Subscribe</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="about/index.html">Our Story</a></li>
+            <li><a href="about/team.html">Our Team</a></li>
+            <li><a href="about/board.html">Board of Directors</a></li>
+            <li><a href="about/reports.html">Annual Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="programs/index.html">All Programs</a></li>
+            <li><a href="workshops/index.html">All Workshops</a></li>
+            <li><a href="workshops/build-your-website.html">Build Your Website</a></li>
+            <li><a href="workshops/find-your-customers.html">Find Your Customers</a></li>
+            <li><a href="research/index.html">Research Hub</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="https://www.canadahelps.org/en/dn/123038" target="_blank" rel="noopener noreferrer">Donate</a></li>
+            <li><a href="get-involved/partner.html">Partner With Us</a></li>
+            <li><a href="get-involved/volunteer.html">Volunteer</a></li>
+            <li><a href="get-involved/community.html">Join Our Community</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>&copy; 2026 TechMind Innovators. All rights reserved.</span>
+          <p class="footer-charity">Registered Canadian Charity &middot; Vancouver, British Columbia, Canada</p>
+        </div>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/particles.js"></script>
+</body>
+</html>

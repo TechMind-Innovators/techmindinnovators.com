@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="160" viewBox="0 0 720 160" fill="none">
+  <!-- Ring -->
+  <circle cx="80" cy="80" r="64" stroke="#1B98A4" stroke-width="14" fill="none"/>
+  <!-- Dot -->
+  <circle cx="80" cy="80" r="22" fill="#F7B731"/>
+  <!-- TechMind -->
+  <text x="176" y="82" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="700" font-size="58" fill="#FFFFFF">TechMind</text>
+  <!-- INNOVATORS -->
+  <text x="178" y="116" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="600" font-size="26" fill="#1B98A4" letter-spacing="8">INNOVATORS</text>
+</svg>
