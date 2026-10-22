@@ -37,7 +37,14 @@
           </div>
         </li>
         <li><a href="research/index.html">Research</a></li>
-        <li><a href="programs/index.html">Programs</a></li>
+        <li class="nav-dd">
+          <button type="button" class="nav-dd-toggle" aria-expanded="false" aria-controls="dd-programs">Programs</button>
+          <div class="nav-dd-menu" id="dd-programs">
+            <a href="programs/index.html">All Programs</a>
+            <a href="programs/community-sessions.html">Community Sessions</a>
+            <a href="programs/ai-ready-workforce.html">AI-Ready Workforce Program</a>
+          </div>
+        </li>
         <li class="nav-dd">
           <button type="button" class="nav-dd-toggle" aria-expanded="false" aria-controls="dd-workshops">Workshops</button>
           <div class="nav-dd-menu" id="dd-workshops">
@@ -72,7 +79,10 @@
     <a href="about/reports.html">Annual Reports</a>
     <div class="mobile-section-title">Learn</div>
     <a href="research/index.html">Research</a>
-    <a href="programs/index.html">Programs</a>
+    <div class="mobile-section-title">Programs</div>
+    <a href="programs/index.html">All Programs</a>
+    <a href="programs/community-sessions.html">Community Sessions</a>
+    <a href="programs/ai-ready-workforce.html">AI-Ready Workforce Program</a>
     <div class="mobile-section-title">Workshops</div>
     <a href="workshops/index.html">All Workshops</a>
     <a href="workshops/build-your-website.html">Build Your Website</a>
@@ -169,7 +179,7 @@
           <p class="stext"><strong>It all started when we noticed how many online tasks were simpler than people thought.</strong> As software engineers, we wanted to share these easy solutions with small businesses and anyone looking to grow online.</p>
           <p class="stext">Our engineer-led workshops cut through the noise, offering hands-on guidance and best practices that accelerate your learning journey. We partner with AWS and community organizations to deliver programs from British Columbia to Ecuador.</p>
           <p class="about-hl">Master complex software without the overwhelm.</p>
-          <div style="margin-top:var(--sp-6)">
+          <div class="mt-6">
             <a href="about/index.html" class="btn btn-primary">Read Our Full Story <span class="btn-arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -230,6 +240,18 @@
           <p>Helping individuals navigate AI-driven workforce changes through funded digital skills training, career support, and employment follow-up.</p>
           <span class="card-link">Learn More <span aria-hidden="true">→</span></span>
         </a>
+      </div>
+      <div class="program-feature reveal">
+        <div class="program-feature-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></div>
+        <div class="program-feature-body">
+          <p class="program-feature-meta">Every second Thursday &middot; Around 5:30 PM (Pacific Time) &middot; Online</p>
+          <h3 id="cs-home-title">Community Sessions</h3>
+          <p>A one-hour online session led by our engineers. Anyone is welcome, including small businesses. Bring your questions and we will share everything we know about the topic.</p>
+        </div>
+        <div class="program-feature-actions">
+          <a href="mailto:programs@techmindinnovators.com?subject=Community%20Session%20registration" class="btn btn-accent">Register by Email</a>
+          <a href="programs/community-sessions.html" class="btn btn-outline">Learn More <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -330,6 +352,7 @@
           <h2 class="footer-h">Programs</h2>
           <ul>
             <li><a href="programs/index.html">All Programs</a></li>
+            <li><a href="programs/community-sessions.html">Community Sessions</a></li>
             <li><a href="workshops/index.html">All Workshops</a></li>
             <li><a href="workshops/build-your-website.html">Build Your Website</a></li>
             <li><a href="workshops/find-your-customers.html">Find Your Customers</a></li>
