@@ -1,216 +1,256 @@
 /* ==========================================================================
-   TechMind — Particle Network Background
-   Interactive connected-dot canvas for the hero section.
-   Particles drift gently; mouse/touch repels them.
+   TechMind — Hero "Connected Ring" network
+   A calm, interactive canvas: nodes orbit the TechMind ring (teal ring,
+   gold core) while ambient nodes drift and link up nearby. Moving the
+   pointer draws gold connections and gently pulls the network toward it.
+
+   Built to stay light on a static site:
+   - ~70 nodes on desktop, ~34 on phones, capped device-pixel-ratio
+   - pauses when the hero is off-screen or the tab is hidden
+   - honours prefers-reduced-motion (draws one still frame, no loop)
+   - pointer is read from the hero, so links/buttons stay clickable
    ========================================================================== */
 
 (function () {
   const canvas = document.getElementById('hero-particles');
-  if (!canvas) return;
+  if (!canvas || !canvas.getContext) return;
 
   const ctx = canvas.getContext('2d');
-  const hero = canvas.parentElement;
+  const hero = canvas.closest('.hero') || canvas.parentElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---- Brand colours ---- */
+  const TEAL = '27,152,164';
+  const GOLD = '247,183,49';
+  const WHITE = '255,255,255';
 
   /* ---- Tunables ---- */
-  const DESKTOP_COUNT = 80;
-  const MOBILE_COUNT = 35;
-  const CONNECT_DIST = 140;        // px — max distance to draw a line
-  const MOUSE_RADIUS = 160;        // px — repulsion zone
-  const MOUSE_STRENGTH = 0.08;     // how hard particles push away
-  const DRIFT_SPEED = 0.3;         // base drift velocity
-  const LEASH_RADIUS = 60;         // px — max wander distance from home
-  const LEASH_STRENGTH = 0.003;    // how firmly the leash pulls back
+  const LINK_DIST = 120;      // px — ambient links
+  const POINTER_DIST = 170;   // px — pointer links
+  const POINTER_PULL = 0.018; // how strongly nodes lean toward the pointer
 
-  /* ---- Brand colours (translucent) ---- */
-  const DOT_TEAL = 'rgba(27, 152, 164, ';      // + alpha)
-  const DOT_GOLD = 'rgba(247, 183, 49, ';
-  const LINE_COLOR = 'rgba(27, 152, 164, ';
+  let W = 0, H = 0, dpr = 1;
+  let ring = { x: 0, y: 0, r: 0 };
+  let ringNodes = [], ambient = [];
+  let pointer = { x: 0, y: 0, active: false };
+  let alpha = 1;
+  let running = false, onScreen = true, rafId = 0, t = 0;
 
-  /* ---- State ---- */
-  let particles = [];
-  let mouse = { x: -9999, y: -9999, active: false };
-  let W, H, dpr, particleCount;
-
-  /* ---- Resize ---- */
-  function resize() {
+  /* ---- Layout: ring sits to the right on wide screens, top-right on phones ---- */
+  function layout() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = hero.offsetWidth;
-    H = hero.offsetHeight;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const wide = W >= 900;
+    alpha = wide ? 1 : 0.5;  // keep text readable where the ring sits behind it
+    ring.r = wide ? Math.min(H * 0.3, 230) : Math.min(W * 0.32, 130);
+    ring.x = wide ? Math.min(W * 0.74, (W + 1180) / 2 - ring.r * 0.6) : W - ring.r * 0.55;
+    ring.y = wide ? H * 0.5 : ring.r * 0.9 + 20;
+
+    const ringCount = wide ? 56 : 30;
+    const ambientCount = wide ? 30 : 10;
+
+    ringNodes = [];
+    for (let i = 0; i < ringCount; i++) {
+      ringNodes.push({
+        a: (i / ringCount) * Math.PI * 2,
+        band: (Math.random() - 0.5) * (wide ? 34 : 20),           // thickness of the ring
+        speed: 0.0011 + Math.random() * 0.0006,
+        r: 1.4 + Math.random() * 1.6,
+        x: 0, y: 0, ox: 0, oy: 0
+      });
+    }
+    ambient = [];
+    for (let i = 0; i < ambientCount; i++) {
+      ambient.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        r: 1 + Math.random() * 1.4,
+        gold: Math.random() < 0.12
+      });
+    }
+    place(0);
   }
 
-  /* ---- Create particles ---- */
-  function init() {
-    resize();
-    particleCount = W < 768 ? MOBILE_COUNT : DESKTOP_COUNT;
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(createParticle());
+  /* ---- Simulation ---- */
+  function place(dt) {
+    const breathe = 1 + Math.sin(t * 0.0009) * 0.025;
+    for (const n of ringNodes) {
+      n.a += n.speed * dt;
+      const rr = ring.r * breathe + n.band;
+      let x = ring.x + Math.cos(n.a) * rr;
+      let y = ring.y + Math.sin(n.a) * rr;
+      if (pointer.active) {
+        const dx = pointer.x - x, dy = pointer.y - y;
+        const d = Math.hypot(dx, dy);
+        if (d < POINTER_DIST * 1.4) {
+          const k = (1 - d / (POINTER_DIST * 1.4)) * 26;
+          n.ox += ((dx / (d || 1)) * k - n.ox) * 0.08;
+          n.oy += ((dy / (d || 1)) * k - n.oy) * 0.08;
+        } else { n.ox *= 0.92; n.oy *= 0.92; }
+      } else { n.ox *= 0.92; n.oy *= 0.92; }
+      n.x = x + n.ox;
+      n.y = y + n.oy;
+    }
+    for (const p of ambient) {
+      p.x += p.vx * dt * 0.06;
+      p.y += p.vy * dt * 0.06;
+      if (pointer.active) {
+        p.x += (pointer.x - p.x) * POINTER_PULL * 0.15;
+        p.y += (pointer.y - p.y) * POINTER_PULL * 0.15;
+      }
+      if (p.x < -20) p.x = W + 20; else if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20; else if (p.y > H + 20) p.y = -20;
     }
   }
 
-  function createParticle() {
-    const isGold = Math.random() < 0.15;   // ~15 % gold dots
-    const radius = isGold ? 2 + Math.random() * 1.5 : 1.2 + Math.random() * 1.8;
-    const alpha = 0.25 + Math.random() * 0.35;
-    const x = Math.random() * W;
-    const y = Math.random() * H;
-    return {
-      x: x,
-      y: y,
-      homeX: x,
-      homeY: y,
-      vx: (Math.random() - 0.5) * DRIFT_SPEED,
-      vy: (Math.random() - 0.5) * DRIFT_SPEED,
-      r: radius,
-      color: isGold ? DOT_GOLD : DOT_TEAL,
-      alpha: alpha,
-    };
+  function link(a, b, max, rgb, strength) {
+    const dx = a.x - b.x, dy = a.y - b.y;
+    const d2 = dx * dx + dy * dy;
+    if (d2 > max * max) return;
+    const o = (1 - Math.sqrt(d2) / max) * strength;
+    ctx.strokeStyle = 'rgba(' + rgb + ',' + o.toFixed(3) + ')';
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
   }
 
-  /* ---- Animation loop ---- */
-  function tick() {
+  function draw() {
     ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 0.7;
 
-    /* Move & draw particles */
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
+    /* Soft halo behind the ring */
+    const g = ctx.createRadialGradient(ring.x, ring.y, ring.r * 0.2, ring.x, ring.y, ring.r * 1.5);
+    g.addColorStop(0, 'rgba(' + TEAL + ',0.10)');
+    g.addColorStop(1, 'rgba(' + TEAL + ',0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(ring.x - ring.r * 1.6, ring.y - ring.r * 1.6, ring.r * 3.2, ring.r * 3.2);
 
-      /* Drift */
-      p.x += p.vx;
-      p.y += p.vy;
+    /* Faint guide circle — echoes the logo ring */
+    ctx.strokeStyle = 'rgba(' + TEAL + ',0.16)';
+    ctx.lineWidth = Math.max(6, ring.r * 0.09);
+    ctx.beginPath(); ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 0.7;
 
-      /* Mouse repulsion */
-      if (mouse.active) {
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MOUSE_RADIUS && dist > 0) {
-          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_STRENGTH;
-          p.vx += (dx / dist) * force * 4;
-          p.vy += (dy / dist) * force * 4;
-        }
-      }
-
-      /* Damping — keep speeds reasonable */
-      p.vx *= 0.98;
-      p.vy *= 0.98;
-
-      /* Home-anchor leash — pull back toward spawn point,
-         stronger the further it drifts from home */
-      const hx = p.homeX - p.x;
-      const hy = p.homeY - p.y;
-      const homeDist = Math.sqrt(hx * hx + hy * hy);
-      if (homeDist > 0) {
-        /* Ramp up pull once past the leash radius */
-        const pull = homeDist > LEASH_RADIUS
-          ? LEASH_STRENGTH * (homeDist / LEASH_RADIUS)
-          : LEASH_STRENGTH * 0.3;
-        p.vx += (hx / homeDist) * pull * homeDist;
-        p.vy += (hy / homeDist) * pull * homeDist;
-      }
-
-      /* Soft clamp — keep within canvas bounds */
-      if (p.x < 0) p.x = 0;
-      if (p.x > W) p.x = W;
-      if (p.y < 0) p.y = 0;
-      if (p.y > H) p.y = H;
-
-      /* Draw dot */
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + p.alpha + ')';
-      ctx.fill();
+    /* Ring: link neighbours around the circle + a few chords */
+    const n = ringNodes.length;
+    for (let i = 0; i < n; i++) {
+      const a = ringNodes[i];
+      link(a, ringNodes[(i + 1) % n], ring.r, TEAL, 0.55);
+      link(a, ringNodes[(i + 2) % n], ring.r, TEAL, 0.25);
+      if (i % 6 === 0) link(a, ringNodes[(i + Math.floor(n / 3)) % n], ring.r * 2.2, TEAL, 0.07);
     }
 
-    /* Draw lines between nearby particles */
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i];
-        const b = particles[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          const opacity = (1 - dist / CONNECT_DIST) * 0.15;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = LINE_COLOR + opacity + ')';
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
+    /* Faint spokes from the core: knowledge reaching out */
+    ctx.lineWidth = 0.6;
+    for (let i = 0; i < n; i += 5) link(ring, ringNodes[i], ring.r * 1.4, GOLD, 0.2);
+    ctx.lineWidth = 0.7;
+
+    /* Ambient links (to each other and to the ring) */
+    for (let i = 0; i < ambient.length; i++) {
+      const a = ambient[i];
+      for (let j = i + 1; j < ambient.length; j++) link(a, ambient[j], LINK_DIST, TEAL, 0.18);
+      for (let k = 0; k < n; k += 3) link(a, ringNodes[k], LINK_DIST, TEAL, 0.14);
     }
 
-    /* Draw lines from mouse to nearby particles */
-    if (mouse.active) {
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MOUSE_RADIUS) {
-          const opacity = (1 - dist / MOUSE_RADIUS) * 0.2;
-          ctx.beginPath();
-          ctx.moveTo(mouse.x, mouse.y);
-          ctx.lineTo(p.x, p.y);
-          ctx.strokeStyle = DOT_GOLD + opacity + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
+    /* Pointer links */
+    if (pointer.active) {
+      ctx.lineWidth = 0.8;
+      for (const p of ambient) link(pointer, p, POINTER_DIST, GOLD, 0.6);
+      for (const p of ringNodes) link(pointer, p, POINTER_DIST, GOLD, 0.5);
+      const pg = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 60);
+      pg.addColorStop(0, 'rgba(' + GOLD + ',0.14)');
+      pg.addColorStop(1, 'rgba(' + GOLD + ',0)');
+      ctx.fillStyle = pg;
+      ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 60, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(' + GOLD + ',0.9)';
+      ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 2.5, 0, Math.PI * 2); ctx.fill();
     }
 
-    requestAnimationFrame(tick);
-  }
-
-  /* ---- Events ---- */
-  function onMouseMove(e) {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-    mouse.active = true;
-  }
-
-  function onMouseLeave() {
-    mouse.active = false;
-    mouse.x = -9999;
-    mouse.y = -9999;
-  }
-
-  function onTouchMove(e) {
-    if (e.touches.length > 0) {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.touches[0].clientX - rect.left;
-      mouse.y = e.touches[0].clientY - rect.top;
-      mouse.active = true;
+    /* Nodes */
+    for (const p of ambient) {
+      ctx.fillStyle = 'rgba(' + (p.gold ? GOLD : WHITE) + ',' + (p.gold ? 0.7 : 0.35) + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
     }
+    ctx.fillStyle = 'rgba(' + TEAL + ',0.95)';
+    for (const p of ringNodes) {
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+
+    /* Gold core — the "dot" of the logo, breathing slowly */
+    const pulse = 1 + Math.sin(t * 0.0018) * 0.06;
+    const core = ring.r * 0.13 * pulse;
+    const cg = ctx.createRadialGradient(ring.x, ring.y, core * 0.6, ring.x, ring.y, core * 2.2);
+    cg.addColorStop(0, 'rgba(' + GOLD + ',0.16)');
+    cg.addColorStop(1, 'rgba(' + GOLD + ',0)');
+    ctx.fillStyle = cg;
+    ctx.beginPath(); ctx.arc(ring.x, ring.y, core * 2.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(' + GOLD + ',0.92)';
+    ctx.beginPath(); ctx.arc(ring.x, ring.y, core, 0, Math.PI * 2); ctx.fill();
   }
 
-  function onTouchEnd() {
-    mouse.active = false;
-    mouse.x = -9999;
-    mouse.y = -9999;
+  /* ---- Loop control ---- */
+  let last = 0;
+  function frame(now) {
+    const dt = Math.min(now - (last || now), 48);
+    last = now;
+    t += dt;
+    place(dt);
+    draw();
+    rafId = requestAnimationFrame(frame);
   }
+  function start() {
+    if (running || reduceMotion.matches || !onScreen || document.hidden) return;
+    running = true; last = 0;
+    rafId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    cancelAnimationFrame(rafId);
+  }
+  function still() { stop(); place(0); draw(); }
 
-  canvas.addEventListener('mousemove', onMouseMove);
-  canvas.addEventListener('mouseleave', onMouseLeave);
-  canvas.addEventListener('touchmove', onTouchMove, { passive: true });
-  canvas.addEventListener('touchend', onTouchEnd);
+  /* ---- Pointer (read from the hero so content stays interactive) ---- */
+  function setPointer(x, y) {
+    const r = canvas.getBoundingClientRect();
+    pointer.x = x - r.left; pointer.y = y - r.top; pointer.active = true;
+  }
+  hero.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'mouse' || e.pointerType === 'pen') setPointer(e.clientX, e.clientY);
+  }, { passive: true });
+  hero.addEventListener('pointerleave', function () { pointer.active = false; });
+  hero.addEventListener('touchmove', function (e) {
+    if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  hero.addEventListener('touchend', function () { pointer.active = false; }, { passive: true });
 
-  /* Debounced resize */
+  /* ---- Visibility & settings ---- */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      onScreen ? start() : stop();
+    }, { threshold: 0 }).observe(hero);
+  }
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  reduceMotion.addEventListener && reduceMotion.addEventListener('change', function () {
+    reduceMotion.matches ? still() : start();
+  });
+
   let resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(init, 200);
+    resizeTimer = setTimeout(function () { layout(); if (!running) draw(); }, 150);
   });
 
-  /* Go */
-  init();
-  requestAnimationFrame(tick);
+  layout();
+  draw();
+  start();
 })();
